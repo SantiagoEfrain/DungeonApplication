@@ -72,8 +72,7 @@ namespace Dungeon_Library
                 $"Max Damage: {MaxDamage}\n" +
                 $"Min Damage: {MinDamage}\n" +
                 $"Bonus Hit Chance: %{BonusHitChance}\n" +
-                $"Two Handed Weapon: {IsTwoHanded}\n";
-
+            $"Two Handed Weapon: {IsTwoHanded}\n";
         }
 
     }
