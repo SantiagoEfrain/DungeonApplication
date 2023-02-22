@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,11 +21,18 @@ namespace Dungeon_Library
          * int for bonusHitChance
          * bool isTwoHanded
          */
+
+
+
+
         private int _maxDamage;
         private int _minDamage;
         private string _name;
         private int _bonusHitChance;
         private bool _isTwoHanded;
+
+        private WeaponType _type;
+        
 
 
         //Props - 1 for each field
@@ -50,31 +60,51 @@ namespace Dungeon_Library
         {
             get { return _isTwoHanded; }
             set { _isTwoHanded = value; }
+
         }
+
+        public WeaponType Type
+        {
+            get { return _type; }
+            set { _type = value; }
+        }
+
+
         //Constructors
         //1 fq ctor, and 1 unqualified ctor if you want Object Initialization Syntax
 
+
+
         public Weapon() { }
 
-        public Weapon(int MaxDamage, int MinDamage, string Name, int BonusHitChance, bool IsTwoHanded)
+        public Weapon(int MaxDamage, int MinDamage, string Name, int BonusHitChance, bool IsTwoHanded, WeaponType type)
         {
             MaxDamage = _maxDamage;
             MinDamage = _minDamage;
             Name = _name;
             BonusHitChance = _bonusHitChance;
             IsTwoHanded = _isTwoHanded;
+            Type = _type;
         }
         //Methods
         //Nicely formatted ToString() override
         public override string ToString()
         {
             return $"{Name}\n\n" +
+                $"Weapon Type: {Type}\n" +
                 $"Max Damage: {MaxDamage}\n" +
                 $"Min Damage: {MinDamage}\n" +
                 $"Bonus Hit Chance: %{BonusHitChance}\n" +
-                $"Two Handed Weapon: {IsTwoHanded}\n";
-
+            $"Two Handed Weapon: {IsTwoHanded}\n";
         }
 
+        //Update the Weapon class to use the WeaponType enum
+        //a. Add a field/property for Type with is of data type WeaponType
+        //b. Add Type to the FQCTOR
+        //c. Add Type to the ToString(
+
     }
+
+    
+
 }
