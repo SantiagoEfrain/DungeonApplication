@@ -52,14 +52,6 @@
         //Constructors - fully qualified, 1 default/unequalified
         public Character() { }
 
-        public Character(int maxLife, int life, string name, int hitChance, int block)
-        {
-            MaxLife = maxLife;
-            Life = maxLife;
-            Name = name;
-            HitChance = hitChance;
-            Block = block;
-        }
 
         protected Character(int maxLife, string name, int hitChance, int block)
         {
@@ -67,6 +59,7 @@
             Name = name;
             HitChance = hitChance;
             Block = block;
+            Life = maxLife;
         }
 
         //Methods
