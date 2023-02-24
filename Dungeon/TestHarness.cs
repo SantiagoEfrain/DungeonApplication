@@ -12,22 +12,10 @@ namespace Dungeon
         static void Main(string[] args)
         {
             //Build and test the fuctionality of our library.
-            Character c1 = new Character()
-            {
-                Name = "Hatake Kazuki",
-                MaxLife = 32,
-                Life = 28,
-                HitChance = 87,
-                Block = 12,
-            };
-            Console.WriteLine(c1);
-
-
-
             //Build and test a weapon
             Weapon w1 = new Weapon()
             {
-                Name = "\n\nMonohoshizao",
+                Name = "\nMonohoshizao",
                 MaxDamage = 22,
                 MinDamage = 15,
                 BonusHitChance = 22,
@@ -36,10 +24,20 @@ namespace Dungeon
             Console.WriteLine(w1);
 
             //Build and test a Character - include CalcBlock(), CalcHitChance(), CalcDamage()
-            Console.WriteLine($"{c1.Name} has a block of {c1.CalcBlock()}");
-            Console.WriteLine($"{c1.Name} has a block of {c1.CalcHitChance()}");
-            Console.WriteLine($"{c1.Name} has a block of {c1.CalcDamage()}");
-
+            Player p1 = new()
+            {
+                Name = "Hatake Kazuki",
+                MaxLife = 32,
+                Life = 28,
+                HitChance = 72,
+                Block = 12,
+                PlayerRace = Race.Human,
+                EquippedWeapon = w1
+            };
+            Console.WriteLine(p1);
+            Console.WriteLine($"{p1.Name} has a block of {p1.CalcBlock()}");
+            Console.WriteLine($"{p1.Name} has a hit chance of {p1.CalcHitChance()}");
+            Console.WriteLine($"{p1.Name} has a damage of {p1.CalcDamage()}");
 
         }
     }

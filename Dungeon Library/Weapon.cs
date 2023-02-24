@@ -30,7 +30,6 @@ namespace Dungeon_Library
         private string _name;
         private int _bonusHitChance;
         private bool _isTwoHanded;
-
         private WeaponType _type;
         
 
@@ -77,14 +76,14 @@ namespace Dungeon_Library
 
         public Weapon() { }
 
-        public Weapon(int MaxDamage, int MinDamage, string Name, int BonusHitChance, bool IsTwoHanded, WeaponType type)
+        public Weapon(int maxDamage, int minDamage, string name, int bonusHitChance, bool isTwoHanded, WeaponType type)
         {
-            MaxDamage = _maxDamage;
-            MinDamage = _minDamage;
-            Name = _name;
-            BonusHitChance = _bonusHitChance;
-            IsTwoHanded = _isTwoHanded;
-            Type = _type;
+            MaxDamage = maxDamage;
+            MinDamage = minDamage;
+            Name = name;
+            BonusHitChance = bonusHitChance;
+            IsTwoHanded = isTwoHanded;
+            Type = type;
         }
         //Methods
         //Nicely formatted ToString() override
@@ -94,8 +93,8 @@ namespace Dungeon_Library
                 $"Weapon Type: {Type}\n" +
                 $"Max Damage: {MaxDamage}\n" +
                 $"Min Damage: {MinDamage}\n" +
-                $"Bonus Hit Chance: %{BonusHitChance}\n" +
-            $"Two Handed Weapon: {IsTwoHanded}\n";
+                $"Bonus Hit Chance: {BonusHitChance}%\n" +
+                $"Two Handed Weapon: {IsTwoHanded}\n";
         }
 
         //Update the Weapon class to use the WeaponType enum
