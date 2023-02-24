@@ -1,6 +1,9 @@
 ﻿namespace Dungeon_Library
 {
-    public class Character
+    //"abstract" denotes an "incomplete" class or method.
+    //This tells the program that we will not create any Character objects directly
+
+    public abstract class Character
     {
         //Fields
 
@@ -49,43 +52,49 @@
         //Constructors - fully qualified, 1 default/unequalified
         public Character() { }
 
-        public Character(int MaxLife, int Life, string Name, int HitChance, int Block)
+        public Character(int maxLife, int life, string name, int hitChance, int block)
         {
-            MaxLife = _maxLife;
-            Life = _life;
-            Name = _name;
-            HitChance = _hitChance;
-            Block = Block;
+            MaxLife = maxLife;
+            Life = maxLife;
+            Name = name;
+            HitChance = hitChance;
+            Block = block;
         }
+
+        protected Character(int maxLife, string name, int hitChance, int block)
+        {
+            MaxLife = maxLife;
+            Name = name;
+            HitChance = hitChance;
+            Block = block;
+        }
+
         //Methods
         //ToString() override
 
         public override string ToString()
         {
             return $"{Name}\n\n" +
-                $"Max Damage: {MaxLife}\n" +
-                $"Min Damage: {Life}\n" +
-                $"Bonus Hit Chance: %{HitChance}\n" +
-                $"Two Handed Weapon: {Block}\n";
+                $"Life:{Life} of {MaxLife}\n" +
+                $"Hit Chance: {HitChance}%\n" +
+                $"Block: {Block}\n";
 
         }
         //CalcBlock() returns an int -> return Block;
-        public decimal CalcBlock()
+        public virtual int CalcBlock()
         {
-            return _block;
+            return Block;
         }
 
         //CalcHitChance() returns an int -> return HitChance;
-        public decimal CalcHitChance()
+        public virtual int CalcHitChance()
         {
-            return (decimal)_hitChance;
+            return HitChance;
         }
         //CalcDamage() returns an int -> return 0;
-        public decimal CalcDamage()
-        {
-            return 0;
-        }
-
+        public abstract int CalcDamage(); //an abstract just says somewhere down the line, one of the child classes MUST 
+            //implement this with some functionality
+      
 
 
         //CalcBlock() returns an int -> return Block;
