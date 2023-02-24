@@ -1,4 +1,5 @@
-﻿namespace Dungeon
+﻿using Dungeon_Library;
+namespace Dungeon
 {
     internal class Program
     {
@@ -10,31 +11,40 @@
             #endregion
 
             #region Player Creation
-            //TODO Variable to keep score
+            //TODONE Variable to keep score
             int score = 0;
             //TODO Weapon creation
+            //Possible Expansion - Display a list of pre-created weapons and let them pick one.
+            //Or, pick one for them randomly.
+            Weapon sword = new Weapon(8, 1, "Long Sword", 10, false, WeaponType.Katana);
 
-            //TODO Player Object creation
+            //TODONE Player Object creation
+            //Potential Expansion - Allow them to enter their own name.
+            //Show them the possible races and let them pick one.
+            Player player = new(5,"Hatake Kazuki",40, 70, Race.Elven,sword);
+
+
             #endregion
 
             #region Main Game Loop
             bool exit = false;
-            int innerCount = 0;
-            int outerCount = 0;
+            //int innerCount = 0;
+            //int outerCount = 0;
             do
             {
                 //Console.WriteLine("Outer " + ++outerCount);
                 //TODO Generate a random room
                 Console.WriteLine(GetRoom());
-                //TODO Select a random monster to inhabit the room
-                Console.WriteLine("Here's a monster!");
+                //TODONE Select a random monster to inhabit the room
+                Monsters monsters = Monsters.GetMonster();
+                Console.WriteLine($"In this room {monsters.Name}!");
                 #region Gameplay Menu Loop
                 bool reload = false;
 
                 do
                 {
                     //Console.WriteLine("Inner: " + ++innerCount);
-                    //TODO Gameplay Menu
+                    //TODONE Gameplay Menu
                     #region Menu
                     Console.Write("\nPlease choose an action:\n" +
                         "A) Attack\n" +
@@ -49,23 +59,43 @@
                     switch (userChoice)
                     {
                         case ConsoleKey.A:
-                            //TODO Combat
-                            Console.WriteLine("ATTACK!");
+                            //TODONE Combat
+                            //Potential Expansion : weapon/race bonus attack
+                            //if race == darkelf -> player.DoAttack(monster)
+                            Combat.DoBattle(player, monsters);
+                            //check if the monster is dead
+                            if (monsters.Life <= 0)
+                            {
+                                //Combat rewards -> money, health, whatever
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine($"\nYou killed {monsters.Name}!");
+                                Console.ResetColor();
+                                //flip the inner-loop bool to true
+                                reload = true;
+
+                                score++;
+                            }
                             break;
 
                         case ConsoleKey.R:
                             //TODO Attack of Opportunity
                             Console.WriteLine("Run away!!");
-                            reload = true;
+                            Console.WriteLine($"{monsters.Name} attacks you as you flee!");
+                            Combat.DoAttack(monsters, player);
+                            Console.WriteLine();//formatting
+                            reload = true;//new room, new monster
                             break;
+
                         case ConsoleKey.P:
                             //TODO player info
                             Console.WriteLine("Player Info: ");
+                            Console.WriteLine(player);
                             break;
 
                         case ConsoleKey.M:
                             //TODO Monster info
                             Console.WriteLine("Monster Info: ");
+                            Console.WriteLine(monsters);
                             break;
 
                         case ConsoleKey.X:
@@ -80,8 +110,12 @@
                     }
 
                     #endregion
-                    //TODO Check player life
-
+                    //TODONE Check player life
+                    if (player.Life <= 0)
+                    {
+                        Console.WriteLine("Dude... you died!\a");
+                        exit = true;
+                    }
 
                 } while (!reload && !exit); //If either exit or reload is true, the inner loop will exit.
                 #endregion

@@ -20,8 +20,8 @@ namespace Dungeon_Library
         {
 
         }
-        public Player(int MaxLife, int Life, string Name, int HitChance, int Block, Race playerRace, Weapon equippedWeapon) 
-            : base(MaxLife, Life, Name, HitChance, Block)
+        public Player(int MaxLife, string Name, int HitChance, int Block, Race playerRace, Weapon equippedWeapon) 
+            : base(MaxLife, Name, HitChance, Block)
         {
             PlayerRace = playerRace;
             EquippedWeapon = equippedWeapon;
@@ -48,6 +48,11 @@ namespace Dungeon_Library
 
 
         }
+
+        public Player(int maxLife, string name, int hitChance, int block, Race elven, WeaponType katana) : base(maxLife, name, hitChance, block)
+        {
+        }
+
         //Methods
 
         public override string ToString()
